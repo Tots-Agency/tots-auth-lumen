@@ -32,7 +32,7 @@ class LoginController extends \Laravel\Lumen\Routing\Controller
             'aud' => 'aud',
             'iat' => (new \DateTime())->getTimestamp(),
             'nbf' => (new \DateTime())->getTimestamp(),
-            'exp' => (new \DateTime())->add(new \DateInterval(18000))->getTimestamp(),
+            'exp' => (new \DateTime())->add(new \DateInterval('P15D'))->getTimestamp(),
             'uid' => $user->id,
             'data' => array(
                 'id' => $user->id,
