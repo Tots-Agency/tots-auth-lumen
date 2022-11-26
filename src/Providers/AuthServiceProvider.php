@@ -2,9 +2,8 @@
 
 namespace Tots\Auth\Providers;
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use Tots\Auth\Models\TotsUser;
+use Tots\Auth\Services\AuthService;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,6 +15,9 @@ class AuthServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->singleton(AuthService::class, function ($app) {
+            return new AuthService(config('auth'));
+        });
     }
 
     /**
