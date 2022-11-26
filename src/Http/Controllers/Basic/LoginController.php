@@ -1,6 +1,6 @@
 <?php
 
-namespace Tots\Auth\Http\Controllers;
+namespace Tots\Auth\Http\Controllers\Basic;
 
 use Illuminate\Http\Request;
 
