@@ -5,7 +5,6 @@ namespace Tots\Auth\Http\Controllers\Basic;
 use Illuminate\Http\Request;
 use Tots\Auth\Models\TotsUser;
 use Illuminate\Support\Facades\Hash;
-use \Firebase\JWT\JWT;
 use Tots\Auth\Services\AuthService;
 
 class LoginController extends \Laravel\Lumen\Routing\Controller
@@ -33,25 +32,9 @@ class LoginController extends \Laravel\Lumen\Routing\Controller
         $data = $user->toArray();
         // Generate Auth Token
         $data['token_type'] = 'bearer';
-        $data['access_token'] = $this->generateAuthToken($user);
+        $data['access_token'] = $this->service->generateAuthToken($user);
         
         return $data;
-    }
-
-    protected function generateAuthToken(TotsUser $user)
-    {
-        return JWT::encode([
-            'iss' => $this->service->config['iss'],
-            'aud' => $this->service->config['aud'],
-            'iat' => (new \DateTime())->getTimestamp(),
-            'nbf' => (new \DateTime())->getTimestamp(),
-            'exp' => (new \DateTime())->add(new \DateInterval($this->service->config['expire']))->getTimestamp(),
-            'uid' => $user->id,
-            'data' => array(
-                'id' => $user->id,
-                'email' => $user->email
-            )
-        ], $this->service->config['key'], 'HS256');
     }
 
     protected function getActiveUser($email, $password)
