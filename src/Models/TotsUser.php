@@ -13,6 +13,8 @@ class TotsUser extends Model implements AuthenticatableContract, AuthorizableCon
 {
     use Authenticatable, Authorizable, HasFactory;
 
+    protected $table = 'tots_user';
+
     /**
      * The attributes that are mass assignable.
      *
