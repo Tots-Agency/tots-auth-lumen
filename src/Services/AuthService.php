@@ -3,6 +3,7 @@
 namespace Tots\Auth\Services;
 
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Tots\Auth\Models\TotsUser;
 
 class AuthService 
@@ -28,5 +29,10 @@ class AuthService
                 'email' => $user->email
             )
         ], $this->config['key'], 'HS256');
+    }
+
+    public function decodeAuthToken($authToken)
+    {
+        return JWT::decode($authToken, new Key($this->config['key'], 'HS256'));
     }
 }
