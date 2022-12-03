@@ -16,10 +16,27 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // Register migrations
+        if($this->app->runningInConsole()){
+            $this->registerMigrations();
+        }
         //
         $this->app->singleton(AuthService::class, function ($app) {
             return new AuthService(config('auth'));
         });
+    }
+    /**
+     * Register migrations library
+     *
+     * @return void
+     */
+    protected function registerMigrations()
+    {
+        $mainPath = database_path('migrations');
+        $paths = array_merge([
+            './vendor/tots/auth-lumen/database/migrations'
+        ], [$mainPath]);
+        $this->loadMigrationsFrom($paths);
     }
 
     /**
