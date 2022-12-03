@@ -15,8 +15,17 @@ return new class extends Migration
     {
         Schema::create('tots_user', function (Blueprint $table) {
             $table->id();
-            $table->string('email', 100);
-            $table->string('password');
+            $table->string('firstname', 100)->nullable(true);
+            $table->string('lastname', 100)->nullable(true);
+            $table->string('email', 250)->nullable(false)->unique();
+            $table->text('photo')->nullable(true);
+            $table->string('phone', 50)->nullable(true);
+            $table->tinyInteger('role')->nullable(false)->default(0);
+            $table->string('password')->nullable(true);
+            $table->tinyInteger('status')->nullable(false)->default(0);
+            $table->tinyInteger('is_notification')->nullable(false)->default(0);
+            $table->text('caption')->nullable(true);
+            $table->string('timezone', 10)->nullable(true);
             $table->timestamps();
         });
     }
