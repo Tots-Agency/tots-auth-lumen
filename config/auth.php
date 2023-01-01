@@ -5,5 +5,5 @@ return [
     'method' => 'jwt',
     'iss' => 'https://tots.agency',
     'aud' => 'https://tots.agency',
-    'expire' => 'P15D'
+    'expire' => 'P150D'
 ];
