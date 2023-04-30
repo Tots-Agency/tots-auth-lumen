@@ -33,8 +33,8 @@ class RegisterController extends \Laravel\Lumen\Routing\Controller
         $password = $request->input('password');
         // Create new user
         $user = new TotsUser();
-        //$user->firstname = $request->input('firstname');
-        //$user->lastname = $request->input('lastname');
+        $user->firstname = $request->input('firstname');
+        $user->lastname = $request->input('lastname');
         $user->email = $email;
         $user->password = Hash::make($password);
         $user->save();

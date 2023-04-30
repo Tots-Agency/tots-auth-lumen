@@ -1,7 +1,7 @@
 {
     "name": "tots/auth-lumen",
     "description": "The library for Lumen PHP",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "type": "library",
     "license": "MIT",
     "autoload": {
