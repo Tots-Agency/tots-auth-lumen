@@ -15,6 +15,7 @@ class TotsUser extends Model implements AuthenticatableContract, AuthorizableCon
 
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
+    const STATUS_SUSPENDED = 2;
 
     protected $table = 'tots_user';
 
