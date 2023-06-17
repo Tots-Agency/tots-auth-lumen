@@ -7,14 +7,10 @@ use Tots\Auth\Models\TotsUser;
 
 class ActiveController extends \Laravel\Lumen\Routing\Controller
 {
-    public function handle(Request $request)
+    public function handle($id)
     {
-        // Validation
-        $this->validate($request, [
-            'id' => 'required'
-        ]);
         // Search user exist
-        $user = TotsUser::where('id', $request->input('id'))->first();
+        $user = TotsUser::where('id', $id)->first();
         if($user === null){
             throw new \Exception('This user not exist');
         }
