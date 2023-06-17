@@ -27,6 +27,7 @@ return new class extends Migration
             $table->text('caption')->nullable(true);
             $table->string('timezone', 10)->nullable(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
