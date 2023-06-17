@@ -15,9 +15,9 @@ class UpdateController extends \Laravel\Lumen\Routing\Controller
             throw new \Exception('Item not exist');
         }
         // Process validations
-        $this->validate($request, [
+        /*$this->validate($request, [
             'title' => 'required|min:3',
-        ]);
+        ]);*/
         // Update values
         $item->firstname = $request->input('firstname');
         $item->lastname = $request->input('lastname');
