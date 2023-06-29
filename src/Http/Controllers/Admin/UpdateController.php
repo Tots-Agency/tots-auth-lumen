@@ -21,6 +21,13 @@ class UpdateController extends \Laravel\Lumen\Routing\Controller
         // Update values
         $item->firstname = $request->input('firstname');
         $item->lastname = $request->input('lastname');
+        $item->photo = $request->input('photo');
+        $item->phone = $request->input('phone');
+        // Verify if email exist
+        if($item->email != $request->input('email') && TotsUser::where('email', $request->input('email'))->count() > 0){
+            throw new \Exception('Email already exist');
+        }
+        $item->email = $request->input('email');
         // Verify if password is set
         $password = $request->input('password');
         if($password !== null) {
