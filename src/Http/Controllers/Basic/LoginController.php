@@ -50,7 +50,7 @@ class LoginController extends \Laravel\Lumen\Routing\Controller
         // Verify if password is correct
         if(!Hash::check($password, $user->password)){
             $this->createAttemp($request, $user);
-            throw new \Exception('Password is not correct.' . ($attemps != null ? ' Attemps: ' . $attemps : ''));
+            throw new \Exception('Incorrect username or password' . ($attemps != null ? ', you have ' . $attemps . ' attempts remaining' : '.'));
         }
 
         return $user;
@@ -69,7 +69,7 @@ class LoginController extends \Laravel\Lumen\Routing\Controller
             ->count();
 
         if($attemps >= $this->service->getMaxAttempt()){
-            throw new \Exception('Max attempt reached');
+            throw new \Exception('You have entered your data wrong numerous times, try again within 1 hour');
         }
 
         return $maxAttempt - $attemps;
