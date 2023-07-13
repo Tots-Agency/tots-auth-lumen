@@ -35,4 +35,9 @@ class AuthService
     {
         return JWT::decode($authToken, new Key($this->config['key'], 'HS256'));
     }
+
+    public function getMaxAttempt()
+    {
+        return $this->config['max_attempt'];
+    }
 }
