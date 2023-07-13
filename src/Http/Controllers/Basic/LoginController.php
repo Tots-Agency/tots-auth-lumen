@@ -28,7 +28,7 @@ class LoginController extends \Laravel\Lumen\Routing\Controller
         $email = $request->input('email');
         $password = $request->input('password');
         // Search active user
-        $user = $this->getActiveUser($email, $password);
+        $user = $this->getActiveUser($request, $email, $password);
         // Process data
         $data = $user->toArray();
         // Generate Auth Token
@@ -38,7 +38,7 @@ class LoginController extends \Laravel\Lumen\Routing\Controller
         return $data;
     }
 
-    protected function getActiveUser($email, $password)
+    protected function getActiveUser(Request $request, $email, $password)
     {
         $user = TotsUser::where('email', $email)->first();
         // Verify if account exist
@@ -49,6 +49,7 @@ class LoginController extends \Laravel\Lumen\Routing\Controller
         $attemps = $this->verifyIfMaxAttempt($user);
         // Verify if password is correct
         if(!Hash::check($password, $user->password)){
+            $this->createAttemp($request, $user);
             throw new \Exception('Password is not correct.' . ($attemps != null ? ' Attemps: ' . $attemps : ''));
         }
 
@@ -72,5 +73,13 @@ class LoginController extends \Laravel\Lumen\Routing\Controller
         }
 
         return $maxAttempt - $attemps;
+    }
+
+    protected function createAttemp(Request $request, TotsUser $user)
+    {
+        $attemp = new TotsUserAttemp();
+        $attemp->user_id = $user->id;
+        $attemp->ip = $request->getClientIp();
+        $attemp->save();
     }
 }
