@@ -46,7 +46,7 @@ class LoginController extends \Laravel\Lumen\Routing\Controller
             throw new \Exception('This account not exist');
         }
         // Verify max attempt
-        $attemps = $this->verifyIfMaxAttempt($user);
+        $attemps = $this->verifyIfMaxAttempt($user) - 1;
         // Verify if password is correct
         if(!Hash::check($password, $user->password)){
             $this->createAttemp($request, $user);
