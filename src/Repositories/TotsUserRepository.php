@@ -19,4 +19,14 @@ class TotsUserRepository
         }
         return $user;
     }
+
+    public function fetchUserByEmailAndPhone($email, $phone)
+    {
+        $user = TotsUser::where('email', $email)->where('phone', $phone)->first();
+        // Verify if account exist
+        if($user === null){
+            throw new \Exception('This user not exist');
+        }
+        return $user;
+    }
 }
