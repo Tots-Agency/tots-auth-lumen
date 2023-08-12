@@ -12,6 +12,11 @@ class TotsUserRepository
 {
     public function fetchUserByPhone($phone)
     {
-        return TotsUser::where('phone', $phone)->first();
+        $user = TotsUser::where('phone', $phone)->first();
+        // Verify if account exist
+        if($user === null){
+            throw new \Exception('This user not exist');
+        }
+        return $user;
     }
 }
