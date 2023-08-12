@@ -38,6 +38,19 @@ class LoginController extends \Laravel\Lumen\Routing\Controller
         return $data;
     }
 
+    public function onlyInfo(Request $request)
+    {
+        // Get Params
+        $email = $request->input('email');
+        $password = $request->input('password');
+        // Search active user
+        $user = $this->getActiveUser($request, $email, $password);
+        // Process data
+        $data = $user->toArray();
+        
+        return $data;
+    }
+
     protected function getActiveUser(Request $request, $email, $password)
     {
         $user = TotsUser::where('email', $email)->first();
