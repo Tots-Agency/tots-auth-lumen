@@ -29,4 +29,13 @@ class TotsUserRepository
         }
         return $user;
     }
+
+    public function removeById($userId)
+    {
+        $user = TotsUser::find($userId);
+        if($user === null){
+            throw new \Exception('This user not exist');
+        }
+        $user->forceDelete();
+    }
 }
