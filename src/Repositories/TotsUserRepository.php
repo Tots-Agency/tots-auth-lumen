@@ -30,6 +30,36 @@ class TotsUserRepository
         return $user;
     }
 
+    public function updatePhoto($userId, $photo)
+    {
+        TotsUser::where('id', $userId)->update(['photo' => $photo]);
+    }
+
+    public function updatePhone($userId, $phone)
+    {
+        TotsUser::where('id', $userId)->update(['phone' => $phone]);
+    }
+
+    public function updateEmail($userId, $email)
+    {
+        TotsUser::where('id', $userId)->update(['email' => $email]);
+    }
+
+    public function updatePassword($userId, $password)
+    {
+        TotsUser::where('id', $userId)->update(['password' => $password]);
+    }
+
+    public function updateFirstname($userId, $firstname)
+    {
+        TotsUser::where('id', $userId)->update(['firstname' => $firstname]);
+    }
+
+    public function updateLastname($userId, $lastname)
+    {
+        TotsUser::where('id', $userId)->update(['lastname' => $lastname]);
+    }
+
     public function removeById($userId)
     {
         $user = TotsUser::find($userId);
