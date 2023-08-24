@@ -60,6 +60,23 @@ class TotsUserRepository
         TotsUser::where('id', $userId)->update(['lastname' => $lastname]);
     }
 
+    public function update($userId, $firstname, $lastname, $email, $phone, $photo)
+    {
+        // Verify if email exist
+        $user = TotsUser::where('email', $email)->where('id', '!=', $userId)->first();
+        if($user !== null){
+            throw new \Exception('This email is already in use');
+        }
+
+        TotsUser::where('id', $userId)->update([
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'email' => $email,
+            'phone' => $phone,
+            'photo' => $photo
+        ]);
+    }
+
     public function removeById($userId)
     {
         $user = TotsUser::find($userId);
