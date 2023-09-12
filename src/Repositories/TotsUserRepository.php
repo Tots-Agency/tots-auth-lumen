@@ -30,6 +30,16 @@ class TotsUserRepository
         return $user;
     }
 
+    public function fetchUserByEmail($email)
+    {
+        $user = TotsUser::where('email', $email)->first();
+        // Verify if account exist
+        if($user === null){
+            throw new \Exception('This user not exist');
+        }
+        return $user;
+    }
+
     public function updatePhoto($userId, $photo)
     {
         TotsUser::where('id', $userId)->update(['photo' => $photo]);
@@ -42,6 +52,12 @@ class TotsUserRepository
 
     public function updateEmail($userId, $email)
     {
+        // Verify if email exist
+        $user = TotsUser::where('email', $email)->where('id', '!=', $userId)->first();
+        if($user !== null){
+            throw new \Exception('This email is already in use');
+        }
+
         TotsUser::where('id', $userId)->update(['email' => $email]);
     }
 
