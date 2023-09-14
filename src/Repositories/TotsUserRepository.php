@@ -40,6 +40,11 @@ class TotsUserRepository
         return $user;
     }
 
+    public function fetchAllByRole($role)
+    {
+        return TotsUser::where('role', $role)->get();
+    }
+
     public function updatePhoto($userId, $photo)
     {
         TotsUser::where('id', $userId)->update(['photo' => $photo]);
