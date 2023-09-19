@@ -40,6 +40,11 @@ class TotsUserRepository
         return $user;
     }
 
+    public function findUserByEmail($email)
+    {
+        return TotsUser::where('email', $email)->first();
+    }
+
     public function fetchAllByRole($role)
     {
         return TotsUser::where('role', $role)->get();
